@@ -259,6 +259,8 @@ function joinStates(states)
     var str = '';
     if (states.submitted)
         str += 'SUBMITTED,';
+    if (states.candidate)
+        str += 'CANDIDATE,';
     if (states.ready)
         str += 'READY,';
     if (states.staging)

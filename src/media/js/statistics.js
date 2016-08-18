@@ -1,6 +1,6 @@
 
 // Overview
-var queueColors = ["#fae932", "#9ed5ff", "#006dcc", "#990099"];
+var queueColors = ["#fae932", "#ff8c00", "#9ed5ff", "#006dcc", "#990099"];
 var lastHourColors = ["#5bb75b", "#bd362f"];
 
 function _generateOverviewPlots($scope, stats)
@@ -8,9 +8,9 @@ function _generateOverviewPlots($scope, stats)
     $scope.queuePlot = new Chart(document.getElementById("queuePlot"), {
         type: "doughnut",
         data: {
-            labels: ['Submitted', 'Ready', 'Active', 'Staging'],
+            labels: ['Submitted', 'Candidate', 'Ready', 'Active', 'Staging'],
             datasets: [{
-                data: [stats.lasthour.submitted, stats.lasthour.ready, stats.lasthour.active, stats.lasthour.staging],
+                data: [stats.lasthour.submitted, stats.lasthour.candidate, stats.lasthour.ready, stats.lasthour.active, stats.lasthour.staging],
                 backgroundColor: queueColors
             }],
         },

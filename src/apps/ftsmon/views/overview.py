@@ -186,7 +186,7 @@ def get_overview(http_request):
     query = """
     SELECT COUNT(file_state) as count, file_state, source_se, dest_se, vo_name
     FROM t_file
-    WHERE file_state in ('SUBMITTED', 'ACTIVE', 'STAGING', 'STARTED') %s
+    WHERE file_state in ('SUBMITTED', 'CANDIDATE', 'ACTIVE', 'STAGING', 'STARTED') %s
     GROUP BY file_state, source_se, dest_se, vo_name order by NULL
     """ % pairs_filter
     cursor.execute(query, se_params)
@@ -194,7 +194,11 @@ def get_overview(http_request):
         triplet_key = (row[2], row[3], row[4])
         triplet = triplets.get(triplet_key, dict())
 
-        triplet[row[1].lower()] = row[0]
+        file_state = row[1].lower()
+        if file_state in ('submitted', 'candidate'):
+            triplet['submitted'] = triplet.get('submitted', 0) + row[0]
+        else:
+            triplet[file_state] = triplet.get(file_state, 0) + row[0]
 
         triplets[triplet_key] = triplet
 

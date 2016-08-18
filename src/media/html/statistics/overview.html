@@ -25,6 +25,7 @@
             <thead>
                 <tr>
                     <th>Submitted</th>
+                    <th>Candidates</th>
                     <th>Ready</th>
                     <th>Active</th>
                     <th>Staging</th>
@@ -34,6 +35,9 @@
                 <tr>
                     <td>
                         <a href="#/transfers?hostname={{host|escape}}&state=SUBMITTED">{{stats.lasthour.submitted}}</a>
+                    </td>
+                    <td>
+                        <a href="#/transfers?hostname={{host|escape}}&state=CANDIDATE">{{stats.lasthour.candidate}}</a>
                     </td>
                     <td>
                         <a href="#/transfers?hostname={{host|escape}}&state=READY">{{stats.lasthour.ready}}</a>

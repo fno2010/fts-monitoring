@@ -136,6 +136,11 @@ td.SUBMITTED, .SUBMITTED {
     background: #FFFF88;
 }
 
+td.CANDIDATE, .CANDIDATE {
+    color: black;
+    background: orange;
+}
+
 .NOT_USED {
 	background: #AAA;
 }
