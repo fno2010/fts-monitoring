@@ -95,7 +95,6 @@ class AppendShares:
                 link.shares[share.vo] = share.active
             yield link
 
-
 @require_certificate
 @jsonify_paged
 def get_link_config(http_request):

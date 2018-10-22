@@ -133,7 +133,7 @@ class JobListDecorator(object):
             return self.job_ids[index]
         else:
             return self._decorated(index)
-
+    
     def __iter__(self):
         class _Iter(object):
             def __init__(self, container):
@@ -247,7 +247,6 @@ class RetriesFetcher(object):
             }, retries.all())
             yield f
 
-
 class LogLinker(object):
     """
     Change the log so it is the actual link
@@ -264,7 +263,6 @@ class LogLinker(object):
             if hasattr(f, 'log_file') and f.log_file:
                 f.log_file = log_link(f.transfer_host, f.log_file)
             yield f
-
 
 @jsonify
 def get_job_transfers(http_request, job_id):
