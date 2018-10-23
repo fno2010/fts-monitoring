@@ -142,7 +142,6 @@ def get_job_list(http_request):
     Luckily, the rest of fields are available in both tables
     """
     filters = setup_filters(http_request)
-    #job_ids = job_ids.filter(dest_se='')
    
     if filters['with_file']:
         job_ids = File.objects.values('job_id').distinct().filter(file_state__in=filters['with_file'])
@@ -163,8 +162,8 @@ def get_job_list(http_request):
         job_ids = job_ids.filter(vo_name=filters['vo'])
     if filters['source_se']:
         job_ids = job_ids.filter(source_se=filters['source_se'])
-    #if filters['dest_se']:
-    job_ids = job_ids.filter(dest_se=filters['dest_se'])
+    if filters['dest_se']:
+        job_ids = job_ids.filter(dest_se=filters['dest_se'])
 
     job_list = JobListDecorator(map(lambda j: j['job_id'], job_ids))
     if filters['diagnosis'] or filters['multireplica']:

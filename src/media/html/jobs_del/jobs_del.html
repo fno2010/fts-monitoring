@@ -1,47 +1,4 @@
-
-
-<!--<div class="navbar sub-navbar">
-    <div class="navbar-inner">
-        <form class="row-fluid" data-ng-submit="applyGlobalFilter()" autocomplete="off">
-            <div class="span2">
-                <div data-ng-show="!attrs.hideVo">
-                    <label for="global-vo"><i class="icon-group" title="VO"></i></label>
-                    <select id="global-vo" data-ng-model="globalFilter.vo" data-ng-options="vo for vo in unique.vos" data-ng-change="applyGlobalFilter()">
-                        <option value="">- All -</option>
-                    </select>
-                </div>
-            </div>
-            <div class="span6">
-                <div data-ng-show="!attrs.hidePair">
-                    <input id="global-source" type="text" data-ng-model="globalFilter.source_se" placeholder="Source storage"
-                        data-typeahead="source for source in unique.sources | safeFilter:$viewValue"
-                        data-typeahead-on-select="applyGlobalFilter()"/>
-            </div>
-            </div>
-            <div class="span2">
-                <div data-ng-show="!attrs.hideTime">
-                    <label for="global-timewindow"><i class="icon-time" title="Time window"></i></label>
-                    <select id="global-timewindow" data-ng-model="globalFilter.time_window" data-ng-change="applyGlobalFilter()">
-                        <option value="1">1 hour</option>
-                        <option value="2">2 hours</option>
-                        <option value="3">3 hours</option>
-                        <option value="4">4 hours</option>
-                        <option value="5">5 hours</option>
-                        <option value="6">6 hours</option>
-                        <option value="24">24 hours</option>
-                    </select>
-                </div>
-            </div>
-            <div class="span2">
-                <a class="btn btn-small btn-info" data-ng-click="applyGlobalFilter()">Apply</a>
-                <a class="btn btn-small" data-ng-click="resetGlobalFilter()">Reset</a>
-                <a class="btn btn-small" data-ng-click="moreFilters()">More filters</a>
-            </div>
-        </form>
-    </div>
-</div>      data-hide-pair="false"  id="global-destination"  data-ng-model="globalFilter.dest_se"   -->
-<global-filter data-hide-pair="false" on-more="showFilterDialog()"></global-filter> <!--hidden menu-->
-<!--<global-filter on-more="showFilterDialog()"></global-filter>-->
+<global-filter data-hide-iconright="true" data-hide-pairdest="true" on-more="showFilterDialog()"></global-filter> <!--hidden menu-->
 
 <h3>
     Showing {{jobs_del.startIndex}} to {{jobs_del.endIndex}} out of {{jobs_del.count}}
