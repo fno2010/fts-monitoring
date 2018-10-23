@@ -113,24 +113,6 @@ function JobDelViewCtrl($rootScope, $location, $scope, job_del, files, Job_del, 
 
     $scope.job_del = job_del;
     $scope.files = files;
-//____________________________________________________________________________________
-//    $scope.getRemainingTime = function(file) {
-//    	if (file.file_state == 'ACTIVE') {
-//    		if (file.throughput && file.filesize) {
-//    			var bytes_per_sec = file.throughput * (1024 * 1024);
-//    			var remaining_bytes = file.filesize - file.transferred;
-//    			var remaining_time = remaining_bytes / bytes_per_sec;
-//   			return (Math.round(remaining_time*100)/100).toString() + ' s';
-//    		}
-//    		else {
-//    			return '?';
-//    		}
-//    	}
-//    	else {
-//    		return '-';
-//   	}
-//    }
-//_______________________________________________________________________________________________________________________
 
     // On page change
     $scope.pageChanged = function(newPage) {
