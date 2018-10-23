@@ -37,7 +37,6 @@ urlpatterns = patterns('ftsmon.views',
     url(r'^jobs_del/(?P<job_id>[a-fA-F0-9\-]+)$',       'jobs_del.get_job_details'),
     url(r'^jobs/(?P<job_id>[a-fA-F0-9\-]+)/files$', 'jobs.get_job_transfers'),
     url(r'^jobs_del/(?P<job_id>[a-fA-F0-9\-]+)/files$', 'jobs_del.get_job_transfers'),
-  #  url(r'^jobs_del/(?P<job_id>[a-fA-F0-9\-]+)/files$', 'jobs_del.get_transfer_list'),
  
     url(r'^transfers$', 'jobs.get_transfer_list'),
 

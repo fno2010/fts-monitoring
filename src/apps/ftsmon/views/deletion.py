@@ -47,9 +47,6 @@ def get_deletion(http_request):
     if filters['vo']:
         pairs_filter += " AND vo_name = %s "
         se_params.append(filters['vo'])
-   # if filters['dest_se']:
-   #     pairs_filter += " AND dest_se = NULL "
-   #     se_params.append(filters['dest_se'])
     
 
     # Result
