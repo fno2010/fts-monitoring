@@ -41,7 +41,6 @@ function JobListDelCtrl($rootScope, $location, $scope, jobs_del, Job_del)
     $scope.filter = {
         vo:          validString($location.$$search.vo),
         source_se:   validString($location.$$search.source_se),
-     //   dest_se:     validString($location.$$search.dest_se),
         time_window: withDefault($location.$$search.time_window, 1),
         state:       statesFromString($location.$$search.state),
         diagnosis:   withDefault($location.$$search.diagnosis, 0),
@@ -138,7 +137,7 @@ function JobDelViewCtrl($rootScope, $location, $scope, job_del, files, Job_del, 
     $scope.autoRefresh = setInterval(function() {
         loading($rootScope);
         var filter   = $location.$$search;
-        filter.jobId = $scope.job_del.job_del.job_id;  //may be $scope.job_del.job.job_id;  ??????????
+        filter.jobId = $scope.job_del.job_del.job_id;
         Job_del.query(filter, function(updatedJob) {
             $scope.job_del = updatedJob;
         })
