@@ -43,8 +43,6 @@ function JobListDelCtrl($rootScope, $location, $scope, jobs_del, Job_del)
         source_se:   validString($location.$$search.source_se),
         time_window: withDefault($location.$$search.time_window, 1),
         state:       statesFromString($location.$$search.state),
-        diagnosis:   withDefault($location.$$search.diagnosis, 0),
-        multireplica:withDefault($location.$$search.multireplica, 0),
     }
 
     $scope.showFilterDialog = function() {
@@ -61,16 +59,11 @@ function JobListDelCtrl($rootScope, $location, $scope, jobs_del, Job_del)
             page:        1,
             time_window: $scope.filter.time_window,
             state:       joinStates($scope.filter.state),
-            diagnosis:   $scope.filter.diagnosis,
-            multireplica:$scope.filter.multireplica
         });
     }
 
     // Method to set class depending on the metadata value
     $scope.classFromMetadata = function(job_del) {
-        if (job_del.diagnosis) {
-            return 'inconsistency';
-        }
         var metadata = job_del.job_metadata;
         if (metadata) {
             metadata = eval('(' + metadata + ')');
@@ -112,7 +105,24 @@ function JobDelViewCtrl($rootScope, $location, $scope, job_del, files, Job_del, 
 
     $scope.job_del = job_del;
     $scope.files = files;
-
+//__________________________________________________________________________________________
+   // $scope.getRemainingTime = function(file) {
+   //     if (file.file_state == 'ACTIVE') {
+   //             if (file.throughput && file.filesize) {
+   //                     var bytes_per_sec = file.throughput * (1024 * 1024);
+   //                     var remaining_bytes = file.filesize - file.transferred;
+   //                     var remaining_time = remaining_bytes / bytes_per_sec;
+   //                     return (Math.round(remaining_time*100)/100).toString() + ' s';
+   //            }
+   //             else {
+   //                     return '?';
+   //             }
+   //     }
+   //     else {
+   //             return '-';
+   //     }
+    //}
+//____________________________________________________________________________________________
     // On page change
     $scope.pageChanged = function(newPage) {
         $location.search('page', newPage);
@@ -124,7 +134,6 @@ function JobDelViewCtrl($rootScope, $location, $scope, job_del, files, Job_del, 
         reason: validString($location.$$search.reason),
         file: validString($location.$$search.file),
     }
-
     $scope.filterByState = function() {
         $location.search('state', joinStates($scope.filter.state));
     }
@@ -137,7 +146,7 @@ function JobDelViewCtrl($rootScope, $location, $scope, job_del, files, Job_del, 
     $scope.autoRefresh = setInterval(function() {
         loading($rootScope);
         var filter   = $location.$$search;
-        filter.jobId = $scope.job_del.job_del.job_id;
+        filter.jobId = $scope.job_del.job.job_id;
         Job_del.query(filter, function(updatedJob) {
             $scope.job_del = updatedJob;
         })
