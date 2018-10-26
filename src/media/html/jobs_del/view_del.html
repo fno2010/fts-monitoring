@@ -64,9 +64,6 @@
     <button type="button" class="btn btn-delete btn-small"
             data-ng-model="filter.state.delete" data-btn-checkbox
             data-ng-disabled="!job_del.states.DELETE">{{job_del.states.DELETE}} DELETE</button>
-    <!--<button type="button" class="btn btn-info btn-small"
-            data-ng-model="filter.state.ready" data-btn-checkbox
-            data-ng-disabled="!job_del.states.READY">{{job_del.states.READY}} READY</button>-->
     <button type="button" class="btn btn-primary btn-small"
             data-ng-model="filter.state.active" data-btn-checkbox
             data-ng-disabled="!job_del.states.ACTIVE">{{job_del.states.ACTIVE}} ACTIVE</button>
@@ -117,7 +114,7 @@
             </td>
             <td class="status {{file.file_state}}">
                 {{file.file_state}}
-                <span data-ng-show="file."
+                <span data-ng-show="file."></span>
             </td>
             <td>{{file.filesize|filesize}}</td>
             <td>{{file.start_time}}</td>
@@ -139,29 +136,13 @@
             <td colspan="6">
                 <ul>
                     <li>Transfer host: {{file.transfer_host}}</li>
-                    <li>Staging host: {{file.staging_host}}</li>
                     <li>PID: {{file.pid}}</li>
                     <li>Hash: {{file.hashed_id|hex}}</li>
-                    <li>Selection strategy: {{file.selection_strategy}}</li>
                     <li>Attempts: {{file.retry}}</li>
                     <li>Duration: {{file.tx_duration}} seconds</li>
-                    <li>Checksum: {{file.checksum}}</li>
-                    <li>User specified size: {{file.user_filesize}}</li>
                     <li>Configuration: {{file.symbolicname}}</li>
                     <li>Finished time: {{file.finish_time}}</li>
                     <li>Error reason: {{file.reason}}</li>
-                    <li>Log file:
-                       <p data-ng-if="file.log_file">
-                           <a href="{{file.log_file}}">
-                               {{file.log_file}}
-                           </a><br/>
-                           <span data-ng-switch="file.log_debug">
-                           <a data-ng-switch-when="1" href="{{file.log_file}}.debug">
-                               {{file.log_file}}.debug
-                           </a>
-                           </span>
-                       </p>
-                    </li>
                     <li>Metadata:
                         <pre>{{file.file_metadata}}</pre>
                     </li>
