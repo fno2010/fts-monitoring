@@ -41,6 +41,10 @@ LOGGING = {
             'handlers': ['file'],
             'level': FTS3WEB_CONFIG.get('logger_db', 'level')
         },
+        'django.request': {
+            'handlers': ['file'],
+            'level': FTS3WEB_CONFIG.get('logger_request', 'level')
+        },
         'ftsmon': {
             'handlers': ['file'],
             'level': FTS3WEB_CONFIG.get('logger_ftsmon', 'level')
