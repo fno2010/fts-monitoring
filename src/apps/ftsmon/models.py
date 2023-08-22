@@ -179,6 +179,33 @@ class DmFile(models.Model):
         db_table = 't_dm'
 
 
+class NetlinkStat(models.Model):
+    netlink_id    = models.CharField(max_length=36, primary_key=True)
+    head_ip       = models.CharField(max_length=150)
+    tail_ip       = models.CharField(max_length=150)
+    head_asn      = models.IntegerField()
+    tail_asn      = models.IntegerField()
+    head_rdns     = models.CharField(max_length=255)
+    tail_rdns     = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.netlink_id
+
+    class Meta:
+        db_table = 't_netlink_stat'
+
+
+class NetlinkTrace(models.Model):
+    trace_id      = models.IntegerField(primary_key=True)
+    source_se     = models.CharField(max_length=255)
+    dest_se       = models.CharField(max_length=255)
+    hop_idx       = models.IntegerField()
+    netlink       = models.ForeignKey('NetlinkStat', db_column='netlink', related_name='traces', related_query_name='trace', null=True)
+
+    class Meta:
+        db_table = 't_netlink_trace'
+
+
 class RetryError(models.Model):
     attempt       = models.IntegerField()
     datetime      = models.DateTimeField()

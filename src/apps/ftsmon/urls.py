@@ -52,6 +52,9 @@ urlpatterns = [
     url(r'^stats/servers$',    statistics.get_servers, name='get_servers'),
     url(r'^stats/vo$',         statistics.get_pervo, name='get_pervo'),
 
+    url(r'^netlink/$',         netlink.get_netlinks, name='get_netlinks'),
+    url(r'^netlink/detailed$', netlink.get_netlink_details, name='get_netlink_details'),
+
     url(r'^optimizer/$',         optimizer.get_optimizer_pairs, name='get_optimizer_pairs'),
     url(r'^optimizer/detailed$', optimizer.get_optimizer_details, name='get_optimizer_details'),
 

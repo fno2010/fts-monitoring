@@ -16,7 +16,14 @@ config(function($routeProvider) {
         when('/transfers',            {templateUrl: STATIC_ROOT + 'html/transfers.html',
                                        controller:  TransfersCtrl,
                                        resolve:     TransfersCtrl.resolve}).
-      
+
+        when('/netlink/',             {templateUrl: STATIC_ROOT + 'html/netlink/overview.html',
+                                       controller:  NetlinkCtrl,
+                                       resolve:     NetlinkCtrl.resolve}).
+        when('/netlink/detailed',     {templateUrl: STATIC_ROOT + 'html/netlink/detailed.html',
+                                       controller:  NetlinkDetailedCtrl,
+                                       resolve:     NetlinkDetailedCtrl.resolve}).
+
         when('/optimizer/',           {templateUrl: STATIC_ROOT + 'html/optimizer/optimizer.html',
                                        controller:  OptimizerCtrl,
                                        resolve:     OptimizerCtrl.resolve}).

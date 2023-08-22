@@ -29,6 +29,17 @@ angular.module('ftsmon.resources', ['ngResource'])
 	})
 })
 
+.factory('Netlink', function($resource) {
+    return  $resource('netlink/', {}, {
+        query: {method: 'GET', isArray: false}
+    })
+})
+.factory('NetlinkDetailed', function($resource) {
+    return  $resource('netlink/detailed', {}, {
+        query: {method: 'GET', isArray: false}
+    })
+})
+
 .factory('Optimizer', function($resource) {
 	return $resource('optimizer', {}, {
 		query: {method: 'GET', isArray: false}

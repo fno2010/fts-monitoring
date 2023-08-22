@@ -20,6 +20,7 @@ __all__ = [
             "index",
             "jobs",
             "linkinfo",
+            "netlink",
             "optimizer",
             "overview",
             "statistics",
