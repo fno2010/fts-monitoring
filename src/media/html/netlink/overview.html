@@ -17,16 +17,45 @@
             <th style="width: 10%">Total Throughput</th>
         </tr>
     </thead>
-    <tbody>
-        <tr ng-repeat="o in netlink.items" ng-class-odd="'odd'">
+    <tbody ng-repeat="o in netlink.items" ng-class-odd="'odd'">
+        <tr>
             <td>
+                <i class="icon-plus" data-ng-click="config.show = !config.show"></i>
                 <a href="#/netlink/detailed?netlink_id={{o.netlink_id}}">
-                    <i class="icon-search"></i>
+                    {{ o.netlink_id }}
                 </a>
-                {{ o.netlink_id }}
             </td>
 			<td>{{ o.total_active_transfers }}</td>
 			<td>{{ o.total_throughput }}</td>
+       </tr>
+       <tr style="background: #CCC" data-ng-show="config.show">
+           <td colspan="3">
+               <table class="table" style="background: #CCC">
+                   <thead>
+                       <tr>
+                           <th>VO</th>
+                           <th>Activity</th>
+                           <th>Active Transfers</th>
+                           <th>Throughput</th>
+                       </tr>
+                   </thead>
+                   <tbody data-ng-repeat="(vo, activities) in o.statistics">
+                       <tr data-ng-repeat="(activity, stat) in activities | slice:0:0">
+                           <td rowspan="{{ activities | objlength }}" style="vertical-align: middle">
+                               {{ vo }}
+                           </td>
+                           <td>{{ activity }}</td>
+                           <td>{{ stat.transfers }}</td>
+                           <td>{{ stat.throughput }}</td>
+                       </tr>
+                       <tr data-ng-repeat="(activity, stat) in activities | slice:1">
+                           <td>{{ activity }}</td>
+                           <td>{{ stat.transfers }}</td>
+                           <td>{{ stat.throughput }}</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </td>
        </tr>
     </tbody>
 </table>

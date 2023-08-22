@@ -107,19 +107,20 @@ def _get_transfer_per_netlink(limit):
     for n in stat:
         item = {}
         item['netlink_id'] = n
-        item['transfers'] = {}
-        item['throughput'] = {}
+        item['statistics'] = {}
         total_active_transfers = 0
         total_throughput = 0
         for vo, act in stat[n]:
-            if vo not in item['transfers']:
-                item['transfers'][vo] = {}
-            item['transfers'][vo][act] = stat[n][(vo, act)]['transfers']
-            total_active_transfers += item['transfers'][vo][act]
-            if vo not in item['throughput']:
-                item['throughput'][vo] = {}
-            item['throughput'][vo][act] = stat[n][(vo, act)]['total_throughput']
-            total_throughput += item['throughput'][vo][act]
+            transfers = stat[n][(vo, act)]['transfers']
+            tput = stat[n][(vo, act)]['total_throughput']
+            if vo not in item['statistics']:
+                item['statistics'][vo] = {}
+            item['statistics'][vo][act] = {
+                'transfers': transfers,
+                'throughput': tput
+            }
+            total_active_transfers += transfers
+            total_throughput += tput
         item['total_active_transfers'] = total_active_transfers
         item['total_throughput'] = total_throughput
         netlink_list.append(item)
