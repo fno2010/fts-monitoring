@@ -34,6 +34,11 @@ angular.module('ftsmon.resources', ['ngResource'])
         query: {method: 'GET', isArray: false}
     })
 })
+.factory('NetlinkTraces', function($resource) {
+    return  $resource('netlink/traces', {}, {
+        query: {method: 'GET', isArray: false}
+    })
+})
 .factory('NetlinkDetailed', function($resource) {
     return  $resource('netlink/detailed', {}, {
         query: {method: 'GET', isArray: false}

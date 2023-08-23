@@ -53,6 +53,7 @@ urlpatterns = [
     url(r'^stats/vo$',         statistics.get_pervo, name='get_pervo'),
 
     url(r'^netlink/$',         netlink.get_netlinks, name='get_netlinks'),
+    url(r'^netlink/traces$',   netlink.get_netlink_traces, name='get_netlink_traces'),
     url(r'^netlink/detailed$', netlink.get_netlink_details, name='get_netlink_details'),
 
     url(r'^optimizer/$',         optimizer.get_optimizer_pairs, name='get_optimizer_pairs'),

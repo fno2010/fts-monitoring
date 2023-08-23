@@ -21,7 +21,7 @@
 
 from django.db import connection
 
-from ftsmon.models import File, NetlinkStat
+from ftsmon.models import File, NetlinkTrace, NetlinkStat
 from libs.util import paged
 from libs.jsonify import jsonify, jsonify_paged
 
@@ -176,3 +176,43 @@ def get_netlink_details(http_request):
         'transfers': paged(transfers, http_request),
         'statistics': stat
     }
+
+
+@jsonify_paged
+def get_netlink_traces(http_request):
+    netlink_traces = NetlinkTrace.objects
+
+    source_se_filter = http_request.GET.get('source_se', None)
+    if source_se_filter:
+        netlink_traces = netlink_traces.filter(source_se=source_se_filter)
+    dest_se_filter = http_request.GET.get('dest_se', None)
+    if dest_se_filter:
+        netlink_traces = netlink_traces.filter(dest_se=dest_se_filter)
+
+    netlink_traces = netlink_traces.order_by('source_se', 'dest_se', 'hop_idx')
+
+    trace_dict = {}
+
+    for trace in netlink_traces:
+        if (trace.source_se, trace.dest_se) not in trace_dict.keys():
+            trace_dict[(trace.source_se, trace.dest_se)] = []
+        trace_dict[(trace.source_se, trace.dest_se)].append({
+            'hop_idx': trace.hop_idx,
+            'netlink_id': trace.netlink.netlink_id,
+            'head_ip': trace.netlink.head_ip,
+            'tail_ip': trace.netlink.tail_ip,
+            'head_asn': trace.netlink.head_asn,
+            'tail_asn': trace.netlink.tail_asn,
+            'head_rdns': trace.netlink.head_rdns,
+            'tail_rdns': trace.netlink.tail_rdns,
+        })
+
+    trace_list = [{
+        'source_se': pair[0],
+        'dest_se': pair[1],
+        'hop_count': len(hops),
+        'hops': hops
+    } for pair, hops in trace_dict.items()]
+
+    return trace_list
+

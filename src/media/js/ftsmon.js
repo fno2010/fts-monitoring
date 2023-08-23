@@ -20,6 +20,9 @@ config(function($routeProvider) {
         when('/netlink/',             {templateUrl: STATIC_ROOT + 'html/netlink/overview.html',
                                        controller:  NetlinkCtrl,
                                        resolve:     NetlinkCtrl.resolve}).
+        when('/netlink/traces',       {templateUrl: STATIC_ROOT + 'html/netlink/traces.html',
+                                       controller:  NetlinkTracesCtrl,
+                                       resolve:     NetlinkTracesCtrl.resolve}).
         when('/netlink/detailed',     {templateUrl: STATIC_ROOT + 'html/netlink/detailed.html',
                                        controller:  NetlinkDetailedCtrl,
                                        resolve:     NetlinkDetailedCtrl.resolve}).

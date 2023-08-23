@@ -57,6 +57,65 @@ NetlinkCtrl.resolve = {
 }
 
 
+function NetlinkTracesCtrl($rootScope, $location, $scope, traces, NetlinkTraces)
+{
+    $scope.traces = traces;
+
+    // Filter
+    $scope.showFilterDialog = function() {
+        document.getElementById('filterDialog').style.display = 'block';
+    }
+
+    $scope.cancelFilters = function() {
+        document.getElementById('filterDialog').style.display = 'none';
+    }
+
+    $scope.filter = {
+        limit: parseInt($location.$$search.limit)
+    }
+
+    $scope.applyFilters = function() {
+        $location.search($scope.filter);
+        document.getElementById('filterDialog').style.display = 'none';
+    }
+
+    // On page change, reload
+    $scope.pageChanged = function(newPage) {
+        $location.search('page', newPage);
+    };
+
+    // Set timer to trigger autorefresh
+    $scope.autoRefresh = setInterval(function() {
+        loading($rootScope);
+        var filter = $location.$$search;
+        filter.page = $scope.netlink.page;
+        Netlink.query(filter, function(updatedNetlink) {
+            $scope.netlink = updatedNetlink;
+            stopLoading($rootScope);
+        },
+        genericFailureMethod(null, $rootScope, $location));
+    }, REFRESH_INTERVAL);
+    $scope.$on('$destroy', function() {
+        clearInterval($scope.autoRefresh);
+    });
+}
+
+
+NetlinkTracesCtrl.resolve = {
+    traces: function ($rootScope, $location, $route, $q, NetlinkTraces) {
+        loading($rootScope);
+
+        var deferred = $q.defer();
+
+        NetlinkTraces.query($location.$$search,
+              genericSuccessMethod(deferred, $rootScope),
+              genericFailureMethod(deferred, $rootScope, $location));
+
+        return deferred.promise;
+    }
+}
+
+
 function NetlinkDetailedCtrl($rootScope, $location, $scope, netlink, NetlinkDetailed, Unique)
 {
     $scope.unique = {

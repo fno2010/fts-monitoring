@@ -1,0 +1,70 @@
+<global-filter></global-filter>
+
+<h3>
+    Showing {{traces.startIndex}} to {{traces.endIndex}} out of {{traces.count}}
+</h3>
+
+<pagination rotate="false"
+    page="traces.page" total-items="traces.count" items-per-page="traces.pageSize"
+    max-size="15" class="pagination" boundary-links="true"
+    on-select-page="pageChanged(page)"></pagination>
+
+<table class="table">
+    <thead>
+            <th style="width: 40%">Source SE</th>
+            <th style="width: 40%">Destination SE</th>
+            <th style="width: 20%">Hop Count</th>
+    </thead>
+    <tbody ng-repeat="pair in traces.items" ng-class-odd="'odd'">
+        <tr>
+            <td>
+                <i class="icon-plus" data-ng-click="config.show = !config.show"></i>
+                <a href="#/optimizer/detailed?source={{pair.source_se}}&destination={{pair.dest_se}}">
+                    <i class="icon-search"></i>
+                </a>
+                {{ pair.source_se }}
+            </td>
+            <td>{{ pair.dest_se }}</td>
+            <td>{{ pair.hop_count }}</td>
+        </tr>
+       <tr style="background: #CCC" data-ng-show="config.show">
+           <td colspan="3">
+               <table class="table" style="background: #CCC">
+                   <thead>
+                       <tr>
+                           <th>Hop Index</th>
+                           <th>Netlink ID</th>
+                           <th>Head IP</th>
+                           <th>Tail IP</th>
+                           <th>Head ASN</th>
+                           <th>Tail ASN</th>
+                           <th>Head rDNS</th>
+                           <th>Tail rDNS</th>
+                       </tr>
+                   </thead>
+                   <tbody data-ng-repeat="hop in pair.hops">
+                       <tr>
+                           <td>{{ hop.hop_idx }}</td>
+                           <td>
+                               <a href="#/netlink/detailed?netlink_id={{hop.netlink_id}}">
+                                   {{ hop.netlink_id }}
+                               </a>
+                           </td>
+                           <td>{{ hop.head_ip }}</td>
+                           <td>{{ hop.tail_ip }}</td>
+                           <td>{{ hop.head_asn }}</td>
+                           <td>{{ hop.tail_asn }}</td>
+                           <td>{{ hop.head_rdns }}</td>
+                           <td>{{ hop.tail_rdns }}</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </td>
+       </tr>
+    </tbody>
+</table>
+
+<pagination rotate="false"
+    page="traces.page" total-items="traces.count" items-per-page="traces.pageSize"
+    max-size="15" class="pagination" boundary-links="true"
+    on-select-page="pageChanged(page)"></pagination>
